@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hackathon", "Hackathon\Hackathon.csproj", "{0348EA01-4F8C-43DF-AC28-42B910B4F697}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GearsMock", "GearsMock\GearsMock.csproj", "{F9B19868-D5B6-48D6-BD85-0C2D8A746CBF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GearRequestDrafter", "GearRequestDrafter\GearRequestDrafter.csproj", "{77C4546A-26F5-43E0-B525-A9BC4E5854A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0348EA01-4F8C-43DF-AC28-42B910B4F697}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0348EA01-4F8C-43DF-AC28-42B910B4F697}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0348EA01-4F8C-43DF-AC28-42B910B4F697}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0348EA01-4F8C-43DF-AC28-42B910B4F697}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F9B19868-D5B6-48D6-BD85-0C2D8A746CBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F9B19868-D5B6-48D6-BD85-0C2D8A746CBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9B19868-D5B6-48D6-BD85-0C2D8A746CBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9B19868-D5B6-48D6-BD85-0C2D8A746CBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77C4546A-26F5-43E0-B525-A9BC4E5854A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77C4546A-26F5-43E0-B525-A9BC4E5854A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77C4546A-26F5-43E0-B525-A9BC4E5854A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77C4546A-26F5-43E0-B525-A9BC4E5854A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
