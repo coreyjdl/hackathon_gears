@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Linq;
+using GearRequestDrafter.Handlers;
 
 namespace GearRequestDrafter.Controllers
 {
@@ -51,6 +52,44 @@ namespace GearRequestDrafter.Controllers
 
             diskRepository.Write(profileLibrary);
             return RedirectToAction("ReadLibrary");
+        }
+
+        public ActionResult CreateRequest(RoleRequest roleRequest)
+        {
+
+            // temporary so we could test the form
+            roleRequest = new RoleRequest()
+            {
+                RoleName = "test",
+                GearsRequests = new List<GearsRequest>() {
+                    new GearsRequest()
+                    {
+                        ApplicationName = "test application for user",
+                        AppID = "123"
+                    },
+                    new GearsRequest()
+                    {
+                        ApplicationName = "second test application for user",
+                        AppID = "123"
+                    }
+                }
+            };
+
+            var model = new User()
+            {
+                RoleName = roleRequest.RoleName,
+                GearsRequests = roleRequest.GearsRequests
+            };
+
+            return View(model);
+        }
+
+        public ActionResult SubmitRequest(User user)
+        {
+            var handler = new GearsSubmissionHandler();
+            handler.SubmitUserRequests(user);
+
+            return View("ReadLibrary");
         }
     }
 }

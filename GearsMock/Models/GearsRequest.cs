@@ -7,6 +7,7 @@ namespace GearsMock.Models
 {
     public class GearsRequest
     {
+        public string UserEmail { get; set; }
         public string ApplicationName { get; set; }   //ie LogRocket
         public string AppID { get; set; }
         public string Domain { get; set; } //ie GlobalPayments

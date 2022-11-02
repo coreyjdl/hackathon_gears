@@ -158,6 +158,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\GearsSubmissionHandler.cs" />
+    <Compile Include="Handlers\IGearsSubmissionHandler.cs" />
     <Compile Include="Models\GearsRequest.cs" />
     <Compile Include="Models\ProfileLibrary.cs" />
     <Compile Include="Models\RoleRequest.cs" />
@@ -204,6 +206,7 @@
     <Content Include="Views\Home\CreateRoleTemplate.cshtml" />
     <Content Include="Views\Home\ReadLibrary.cshtml" />
     <Content Include="Views\Shared\_RoleEdit.cshtml" />
+    <Content Include="Views\Home\CreateRequest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
