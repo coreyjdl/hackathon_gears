@@ -52,7 +52,5 @@ namespace GearRequestDrafter.Controllers
             diskRepository.Write(profileLibrary);
             return RedirectToAction("ReadLibrary");
         }
-
-
     }
 }
