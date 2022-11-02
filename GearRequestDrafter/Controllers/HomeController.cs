@@ -1,4 +1,5 @@
-﻿using GearRequestDrafter.Repositories;
+﻿using GearRequestDrafter.Models;
+using GearRequestDrafter.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +12,19 @@ namespace GearRequestDrafter.Controllers
     {
         public ActionResult Index()
         {
-            DiskRepository dRepo = new DiskRepository();
+
+            //DiskRepository.Read();
             return View();
         }
 
         public ActionResult CreateGearsRequest()
         {
             return View();
+        }
+
+        public ActionResult ReadLibrary()
+        {
+            return View(DiskRepository.Read());
         }
 
         public ActionResult CreateRoleTemplate()
