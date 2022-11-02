@@ -19,7 +19,6 @@ namespace GearRequestDrafter.Repositories
             path = filePath + fileName;
         }
 
-
         public void Write(ProfileLibrary pLibrary)
             {
                 //Create File if it does not exist

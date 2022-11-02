@@ -4,6 +4,6 @@ namespace GearRequestDrafter.Handlers
 {
     public interface IGearsSubmissionHandler
     {
-        void SubmitUserRequests(User user);
+        void SubmitUserRequestsAsync(User user);
     }
 }
