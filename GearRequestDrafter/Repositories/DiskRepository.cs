@@ -1,63 +1,63 @@
 ﻿using GearRequestDrafter.Models;
-using Microsoft.Ajax.Utilities;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using System.Text.Json;
 using System.Web;
-using System.Web.Mvc;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace GearRequestDrafter.Repositories
 {
-    public class DiskRepository
+    public class DiskRepository : IDiskRepository
     {
-        private static string filePath = HttpContext.Current.Server.MapPath("~/App_Data/");
-        private static string fileName = "profileLibrary.json";
-        private static string path = filePath + fileName;
-        
-        public static void Write(ProfileLibrary pLibrary)
+        private readonly string filePath = HttpContext.Current.Server.MapPath("~/App_Data/");
+        private readonly string fileName = "profileLibrary.json";
+
+        private string path;
+
+        public DiskRepository()
         {
-            //Create File if it does not exist
-            if (!File.Exists(path))
-            {
-                // Create the file.
-                using (FileStream fs = File.Create(path))
-                {
-                    Byte[] info = new UTF8Encoding(true).GetBytes("This is some text in the file.");
+            //TODO: allow path params 
+            path = filePath + fileName;
+        }
 
-                    // Add some information to the file.
-                    fs.Write(info, 0, info.Length);
-                }
-            }
 
-            else
+        public void Write(ProfileLibrary pLibrary)
             {
-                if(pLibrary != null)
+                //Create File if it does not exist
+                if (!File.Exists(path))
                 {
-                    File.Delete(path);
-                    using (FileStream fs = File.Create(path))
+                    // Create the file.
+                    using (var fs = File.Create(path))
                     {
-                        Byte[] info = new UTF8Encoding(true).GetBytes(JsonSerializer.Serialize(pLibrary));
+                        var info = new UTF8Encoding(true).GetBytes("This is some text in the file.");
 
                         // Add some information to the file.
                         fs.Write(info, 0, info.Length);
                     }
                 }
 
-            }
-        }
+                else
+                {
+                    if(pLibrary != null)
+                    {
+                        File.Delete(path);
+                        using (var fs = File.Create(path))
+                        {
+                            var info = new UTF8Encoding(true).GetBytes(JsonSerializer.Serialize(pLibrary));
 
-        public static ProfileLibrary Read()
+                            // Add some information to the file.
+                            fs.Write(info, 0, info.Length);
+                        }
+                    }
+
+                }
+            }
+
+        public ProfileLibrary Read()
         {
-            ProfileLibrary pLibrary = new ProfileLibrary();
+            var pLibrary = new ProfileLibrary();
             if (File.Exists(path))
             {
-                string jsonFile = File.ReadAllText(path);
+                var jsonFile = File.ReadAllText(path);
                 pLibrary = JsonSerializer.Deserialize<ProfileLibrary>(jsonFile);
             }
 
