@@ -1,25 +1,48 @@
 ﻿using GearRequestDrafter.Models;
-using Microsoft.Ajax.Utilities;
-using System;
+using GearRequestDrafter.Repositories;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Web;
-using System.Text.Json;
+
 
 namespace GearRequestDrafter.Handlers
 {
     public class GearsSubmissionHandler : IGearsSubmissionHandler
     {
-        private readonly string url = "localhost:3000";
-
-        private static HttpClient client = new HttpClient();
-
-        public async void SubmitUserRequestsAsync(User user)
+        public IGearsRepository gearsRepository;
+        
+        public GearsSubmissionHandler()
         {
-            var body = JsonSerializer.Serialize(user);
+            gearsRepository = new GearsRepository();
+        }
 
-            await client.PostAsync(url, new StringContent(body));
+        public void SubmitUserRequests(User user)
+        {
+            var requests = mapUser(user);
+            foreach (var request in requests)
+            {
+                gearsRepository.SendRequest(request);
+            }
+        }
+
+        private List<Request> mapUser(User user)
+        {
+            var request = new List<Request>();
+
+            foreach(var gearsRequest in user.GearsRequests)
+            {
+                request.Add(new Request()
+                {
+                    UserEmail = user.Email,
+                    ApplicationName = gearsRequest.ApplicationName,
+                    AppID = gearsRequest.AppID,
+                    Domain = gearsRequest.Domain,
+                    Environment = gearsRequest.Environment,
+                    RoleName = gearsRequest.RoleName,
+                    Details = gearsRequest.Details
+                });
+
+            }
+
+            return request;
         }
     }
 }
