@@ -2,6 +2,7 @@
 using GearRequestDrafter.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,6 +11,8 @@ namespace GearRequestDrafter.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly DiskRepository diskRepository = new DiskRepository();
+        
         public ActionResult Index()
         {
 
@@ -24,7 +27,7 @@ namespace GearRequestDrafter.Controllers
 
         public ActionResult ReadLibrary()
         {
-            return View(DiskRepository.Read());
+            return View(diskRepository.Read());
         }
 
         public ActionResult CreateRoleTemplate()
