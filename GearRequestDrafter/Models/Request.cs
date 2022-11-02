@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace GearRequestDrafter.Models
+﻿namespace GearRequestDrafter.Models
 {
+    // this is used for the api posts, it does not need any views. 
+
     public class Request
     {
         public string UserEmail { get; set; }

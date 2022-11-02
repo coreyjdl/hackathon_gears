@@ -1,12 +1,9 @@
 ﻿using GearRequestDrafter.Models;
 using GearRequestDrafter.Repositories;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Linq;
 using GearRequestDrafter.Handlers;
 
 namespace GearRequestDrafter.Controllers
@@ -57,7 +54,10 @@ namespace GearRequestDrafter.Controllers
         public ActionResult CreateRequest(RoleRequest roleRequest)
         {
 
-            // temporary so we could test the form
+            // temporary so we could test the form the submission from this form will give the user object it
+            // creates to the SubmitRequest method just below this one. that's the end of the view run and should actually post
+            // to the mock api
+
             roleRequest = new RoleRequest()
             {
                 RoleName = "test",
