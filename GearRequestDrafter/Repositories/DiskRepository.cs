@@ -48,7 +48,6 @@ namespace GearRequestDrafter.Repositories
                             fs.Write(info, 0, info.Length);
                         }
                     }
-
                 }
             }
 
