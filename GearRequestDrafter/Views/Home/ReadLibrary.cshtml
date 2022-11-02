@@ -25,10 +25,13 @@
             @role.RoleName
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit Modal URL", null, new {@class = "btn"}, new {data_toggle = "modal", data_target = "#EditModal" })
+            @* Need to update *@
+            @Html.ActionLink("Edit", "Edit Modal URL", null, new { @class = "btn" }, new { data_toggle = "modal", data_target = "#EditModal" })
         </td>
         <td>
-            @Html.ActionLink("Delete", "Delete Modal", null, new {@class = "btn"}, new {data_toggle = "modal", data_target = "#DeleteModal" })
+            <button type="button" class="btn btn-warning rounded">
+                @Html.ActionLink("Delete", "DeleteRoleFromLibrary", new {role.RoleName})
+            </button>
         </td>
     </tr>
 }

@@ -32,27 +32,25 @@ namespace GearRequestDrafter.Controllers
             return View(model);
         }
 
-        public ActionResult ReadLibrary(ProfileLibrary profileLibrary)
-        {
-            var model = profileLibrary;
-            return View(model);
-        }
+        //public ActionResult ReadLibrary(ProfileLibrary profileLibrary)
+        //{
+        //    var model = profileLibrary;
+        //    return View(model);
+        //}
 
         public ActionResult CreateRoleTemplate()
         {
             return View();
         }
 
-        public ActionResult DeleteRoleFromLibrary(ProfileLibrary profileLibrary, string roleName)
+        public ActionResult DeleteRoleFromLibrary(string roleName)
         {
-            //remove role from list
-            profileLibrary.profileLibrary
-                .ToList()
-                .Remove(profileLibrary.profileLibrary
-                    .Where(x => x.RoleName == roleName)
-                    .FirstOrDefault());
+            var profileLibrary = diskRepository.Read();
 
-            return ReadLibrary(profileLibrary);
+            profileLibrary.profileLibrary = profileLibrary.profileLibrary.Where(x => x.RoleName != roleName);
+
+            diskRepository.Write(profileLibrary);
+            return RedirectToAction("ReadLibrary");
         }
 
 
