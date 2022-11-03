@@ -45,7 +45,8 @@ namespace GearRequestDrafter.Controllers
             bool exists = pLibrary.profileLibrary.Any(x=>x.RoleName == roleRequest.RoleName);
             if(exists)
             {
-                return View();
+                ModelState.AddModelError("", "Role Already Exists");
+                return View("CreateRoleTemplate");
 
             }
             else
