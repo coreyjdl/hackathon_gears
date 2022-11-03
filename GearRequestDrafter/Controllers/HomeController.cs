@@ -77,34 +77,15 @@ namespace GearRequestDrafter.Controllers
             return RedirectToAction("ReadLibrary");
         }
 
-        public ActionResult CreateRequest(RoleRequest roleRequest)
+        public ActionResult CreateRequest(string roleName)
         {
-
-            // temporary so we could test the form the submission from this form will give the user object it
-            // creates to the SubmitRequest method just below this one. that's the end of the view run and should actually post
-            // to the mock api
-     
-            roleRequest = new RoleRequest()
-            {
-                RoleName = roleRequest.RoleName,
-                GearsRequests = new List<GearsRequest>() {
-                    new GearsRequest()
-                    {
-                        ApplicationName = "test application for user",
-                        AppID = "123"
-                    },
-                    new GearsRequest()
-                    {
-                        ApplicationName = "second test application for user",
-                        AppID = "123"
-                    }
-                }
-            };
+            var pLibrary = diskRepository.Read();
+            var role = pLibrary.profileLibrary.Where(x => x.RoleName == roleName).FirstOrDefault();
 
             var model = new User()
             {
-                RoleName = roleRequest.RoleName,
-                GearsRequests = roleRequest.GearsRequests
+                RoleName = role.RoleName,
+                GearsRequests = role.GearsRequests
             };
 
             return View(model);
