@@ -8,31 +8,31 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+        <div class="container-fluid">
+            @Html.ActionLink("GEARS Requester", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls=".navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Create Request (I'm a modal)", "CreateGearsRequest", "Home")</li>
-                    <li>@Html.ActionLink("Create Role Template (I'm a modal too)", "CreateRoleTemplate", "Home")</li>
-                    <li>@Html.ActionLink("Read Library (I'm the home page)", "ReadLibrary", "Home")</li>
-                    <li>@Html.ActionLink("Create User Request for the API and Submit page (I'm a page created when you click on a role)", "CreateRequest", "Home")</li>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    @* Modal *@
+                    <li class="nav-item">@Html.ActionLink("Create Request", "CreateGearsRequest", "Home", new {@class= "nav-link"})</li>
+                    @* Modal *@
+                    <li class="nav-item">@Html.ActionLink("Create Role", "CreateRoleTemplate", "Home", new { @class = "nav-link" })</li>
+                    @* Home Page *@
+                    <li class="nav-item">@Html.ActionLink("Profile Library", "ReadLibrary", "Home", new { @class = "nav-link" })</li>
+                    @*  for the API and Submit page (I'm a page created when you click on a role) *@
+                    <li class="nav-item">@Html.ActionLink("Create User Request", "CreateRequest", "Home", new { @class = "nav-link" })</li>
 
                 </ul>
             </div>
         </div>
-    </div>
+    </nav>
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
+        <footer class="fixed-bottom">
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>

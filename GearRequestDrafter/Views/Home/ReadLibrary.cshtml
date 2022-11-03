@@ -3,100 +3,83 @@
 
 @using (Html.BeginForm())
 {
-@Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>ProfileLibrary</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
-        </div>
+    <div style="height: 500px" class=" container-fluid form-horizontal text-center pt-5 justify-content-center">
+        <h4 style="">Profiles</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <table class="justify-content-center">
+            @foreach (GearRequestDrafter.Models.RoleRequest role in Model.profileLibrary)
+            {
+                <tr>
+                    <td class="col-lg-8">
+                        @role.RoleName
+                    </td>
+                    <td class="col-lg-2">
+                        @* Need to update *@
+                        @Html.ActionLink("Edit", "EditRole", new { role.RoleName }, new { @class = "btn btn-sm btn-warning" })
+                    </td>
+                    <td class="col-lg-2">
+                        <button class = "btn btn-sm btn-danger" data-target="#DeleteModal" data-toggle="modal">
+                            Delete
+                        </button>
+                        @Html.ActionLink("Delete", "DeleteRoleFromLibrary", new { role.RoleName }, new { @class = "btn btn-sm btn-danger" })
+
+                    </td>
+                </tr>
+            }
+        </table>
     </div>
-</div>
-}
+    <div class="container position-relative text-center">
+        @Html.ActionLink("Save", "CreateRoleTemplate", null, new { @class = "btn btn-sm btn-outline-success" })
 
-<table>
-    @foreach(GearRequestDrafter.Models.RoleRequest role in Model.profileLibrary)
-{
-    <tr>
-        <td>
-            @role.RoleName
-        </td>
-        <td>
-            @* Need to update *@
-            @Html.ActionLink("Edit", "Edit Modal URL", null, new { @class = "btn" }, new { data_toggle = "modal", data_target = "#EditModal" })
-        </td>
-        <td>
-            <button type="button" class="btn btn-warning rounded">
-                @Html.ActionLink("Delete", "DeleteRoleFromLibrary", new {role.RoleName})
-            </button>
-        </td>
-    </tr>
-}
-</table>
-<button>Save</button>
-<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="editModalTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editModalTitle">Edit Role</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                @{
+        @Html.ActionLink("Create Role", "CreateRoleTemplate", null, new { @class = "btn btn-sm btn-outline-primary" })
+    </div>
+    <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="editModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalTitle">Edit Role</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @{
                         Html.RenderPartial("_RoleEdit");
-                }
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-<div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalTitle">Delete Role</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div>Are you sure you want to delete this role?</div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                @Html.ActionLink("Delete","DeleteRoleFromLibrary")
-                <button type="button" class="btn btn-warning" data-dismiss="modal">Delete</button>
+    <div class="modal fade " tabindex="-1" id="DeleteModal" role="dialog" aria-labelledby="deleteModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalTitle">Delete Role</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <p>Are you sure you want to delete this role?</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-@using (Html.BeginForm())
-{
-@Html.AntiForgeryToken()
-
-<div class="form-horizontal">
-    <h4>ProfileLibrary</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
-        </div>
-    </div>
-</div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back Home", "Index")
 </div>
 
 @section Scripts {
