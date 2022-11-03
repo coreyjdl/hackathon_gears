@@ -92,12 +92,13 @@ namespace GearRequestDrafter.Controllers
             return View(model);
         }
 
-        public ActionResult SubmitRequest(User user)
+        [HttpPost]
+        public ActionResult CreateRequest(User user)
         {
             var handler = new GearsSubmissionHandler();
             handler.SubmitUserRequests(user);
 
-            return View("ReadLibrary");
+            return RedirectToAction("CreateRequest", "Home", new { user.RoleName });
         }
     }
 }
