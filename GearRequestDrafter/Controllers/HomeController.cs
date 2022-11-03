@@ -95,8 +95,17 @@ namespace GearRequestDrafter.Controllers
         [HttpPost]
         public ActionResult CreateRequest(User user)
         {
+            var pLibrary = diskRepository.Read();
+            var role = pLibrary.profileLibrary.Where(x => x.RoleName == user.RoleName).FirstOrDefault();
+
+            var request = new User()
+            {
+                RoleName = role.RoleName,
+                GearsRequests = role.GearsRequests
+            };
+
             var handler = new GearsSubmissionHandler();
-            handler.SubmitUserRequests(user);
+            handler.SubmitUserRequests(request);
 
             return RedirectToAction("CreateRequest", "Home", new { user.RoleName });
         }
