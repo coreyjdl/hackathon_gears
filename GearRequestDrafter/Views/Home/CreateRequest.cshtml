@@ -12,7 +12,6 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>User Should inherit rolename and the collection of gears request</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -38,7 +37,6 @@
                 {
                     <p>@request.ApplicationName</p>
                 }
-            Hidden form atributes to include gearsrequest collection and rolename
 
             @Html.HiddenFor(m => m.GearsRequests, new { Value = Model.GearsRequests })
             @Html.HiddenFor(m => m.RoleName, new {Value = Model.RoleName })

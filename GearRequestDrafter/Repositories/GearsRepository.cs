@@ -10,7 +10,7 @@ namespace GearRequestDrafter.Repositories
 {
     public class GearsRepository : IGearsRepository
     {
-        private readonly string url = "localhost:3000";
+        private readonly string url = "localhost:63051/CreateGearsRequestDraft";
         private static HttpClient client = new HttpClient();
 
         public async void SendRequest(Request request)

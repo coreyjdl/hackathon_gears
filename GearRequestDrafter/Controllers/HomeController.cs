@@ -94,45 +94,36 @@ namespace GearRequestDrafter.Controllers
             return RedirectToAction("ReadLibrary");
         }
 
-        public ActionResult CreateRequest(RoleRequest roleRequest)
+        public ActionResult CreateRequest(string roleName)
         {
-
-            // temporary so we could test the form the submission from this form will give the user object it
-            // creates to the SubmitRequest method just below this one. that's the end of the view run and should actually post
-            // to the mock api
-
-            roleRequest = new RoleRequest()
-            {
-                RoleName = roleRequest.RoleName,
-                GearsRequests = new List<GearsRequest>() {
-                    new GearsRequest()
-                    {
-                        ApplicationName = "test application for user",
-                        AppID = "123"
-                    },
-                    new GearsRequest()
-                    {
-                        ApplicationName = "second test application for user",
-                        AppID = "123"
-                    }
-                }
-            };
+            var pLibrary = diskRepository.Read();
+            var role = pLibrary.profileLibrary.Where(x => x.RoleName == roleName).FirstOrDefault();
 
             var model = new User()
             {
-                RoleName = roleRequest.RoleName,
-                GearsRequests = roleRequest.GearsRequests
+                RoleName = role.RoleName,
+                GearsRequests = role.GearsRequests
             };
 
             return View(model);
         }
 
-        public ActionResult SubmitRequest(User user)
+        [HttpPost]
+        public ActionResult CreateRequest(User user)
         {
-            var handler = new GearsSubmissionHandler();
-            handler.SubmitUserRequests(user);
+            var pLibrary = diskRepository.Read();
+            var role = pLibrary.profileLibrary.Where(x => x.RoleName == user.RoleName).FirstOrDefault();
 
-            return View("ReadLibrary");
+            var request = new User()
+            {
+                RoleName = role.RoleName,
+                GearsRequests = role.GearsRequests
+            };
+
+            var handler = new GearsSubmissionHandler();
+            handler.SubmitUserRequests(request);
+
+            return RedirectToAction("CreateRequest", "Home", new { user.RoleName });
         }
     }
 }
