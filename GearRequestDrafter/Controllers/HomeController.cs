@@ -17,7 +17,7 @@ namespace GearRequestDrafter.Controllers
         {
 
             //diskRepository.Read();
-            return View();
+            return RedirectToAction("ReadLibrary");
         }
 
         public ActionResult CreateGearsRequest(RoleRequest model)
