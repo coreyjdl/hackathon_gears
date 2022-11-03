@@ -49,7 +49,6 @@ namespace GearRequestDrafter.Repositories
                     }
                 }
             }
-
         public ProfileLibrary Read()
         {
             var pLibrary = new ProfileLibrary();

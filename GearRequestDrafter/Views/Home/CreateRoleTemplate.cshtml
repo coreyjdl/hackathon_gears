@@ -1,12 +1,12 @@
 ﻿@model GearRequestDrafter.Models.RoleRequest
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("CreateRole", "Home",FormMethod.Post,new {Model}))
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>RoleRequest</h4>
+        <h4>Role Request</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -19,7 +19,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-info" />
             </div>
         </div>
     </div>

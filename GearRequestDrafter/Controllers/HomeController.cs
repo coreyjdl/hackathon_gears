@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Web.Mvc;
 using GearRequestDrafter.Handlers;
+using System.Web.Services.Description;
 
 namespace GearRequestDrafter.Controllers
 {
@@ -19,9 +20,9 @@ namespace GearRequestDrafter.Controllers
             return View();
         }
 
-        public ActionResult CreateGearsRequest()
+        public ActionResult CreateGearsRequest(RoleRequest model)
         {
-            return View();
+            return View(model);
         }
 
         public ActionResult ReadLibrary()
@@ -29,16 +30,41 @@ namespace GearRequestDrafter.Controllers
             var model = diskRepository.Read();
             return View(model);
         }
-
-        //public ActionResult ReadLibrary(ProfileLibrary profileLibrary)
-        //{
-        //    var model = profileLibrary;
-        //    return View(model);
-        //}
-
+        public ActionResult EditRole(string roleName)
+        {
+            return View();
+        }
         public ActionResult CreateRoleTemplate()
         {
             return View();
+        }
+         public ActionResult CreateRole(RoleRequest roleRequest)
+        {
+            //find if role name is already in repo
+            var pLibrary = diskRepository.Read();
+            bool exists = pLibrary.profileLibrary.Any(x=>x.RoleName == roleRequest.RoleName);
+            if(exists)
+            {
+                return View();
+
+            }
+            else
+            {
+                pLibrary.profileLibrary.Append(roleRequest);
+                var addRole = new RoleRequest() {
+                    GearsRequests = new List<GearsRequest>(),
+                    RoleName = roleRequest.RoleName
+                };
+                var newLibrary = new List<RoleRequest>();
+                newLibrary.Add(addRole);
+                foreach(var rr in pLibrary.profileLibrary)
+                {
+                    newLibrary.Add(rr);
+                }
+                diskRepository.Write(new ProfileLibrary() {profileLibrary = newLibrary });
+                return RedirectToAction("ReadLibrary");
+            }
+
         }
 
         public ActionResult DeleteRoleFromLibrary(string roleName)
@@ -57,10 +83,10 @@ namespace GearRequestDrafter.Controllers
             // temporary so we could test the form the submission from this form will give the user object it
             // creates to the SubmitRequest method just below this one. that's the end of the view run and should actually post
             // to the mock api
-
+     
             roleRequest = new RoleRequest()
             {
-                RoleName = "test",
+                RoleName = roleRequest.RoleName,
                 GearsRequests = new List<GearsRequest>() {
                     new GearsRequest()
                     {

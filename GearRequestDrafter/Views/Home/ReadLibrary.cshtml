@@ -5,7 +5,7 @@
 {
     @Html.AntiForgeryToken()
 
-    <div style="height: 500px" class=" container-fluid form-horizontal text-center pt-5 justify-content-center">
+    <div style="height: 500px; margin-top: 10px;" class=" container-fluid form-horizontal text-center mt-5 justify-content-center">
         <h4 style="">Profiles</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -21,9 +21,6 @@
                         @Html.ActionLink("Edit", "EditRole", new { role.RoleName }, new { @class = "btn btn-sm btn-warning" })
                     </td>
                     <td class="col-lg-2">
-                        <button class = "btn btn-sm btn-danger" data-target="#DeleteModal" data-toggle="modal">
-                            Delete
-                        </button>
                         @Html.ActionLink("Delete", "DeleteRoleFromLibrary", new { role.RoleName }, new { @class = "btn btn-sm btn-danger" })
 
                     </td>
@@ -53,25 +50,6 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade " tabindex="-1" id="DeleteModal" role="dialog" aria-labelledby="deleteModalTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalTitle">Delete Role</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div>
-                        <p>Are you sure you want to delete this role?</p>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
